@@ -11,7 +11,7 @@ The application I'm implementing in this project I've called _Brewnotes -- beers
 
 In any application, I believe it's important to start with the content. While programming is about looking for patterns that are generally applicable and then getting computers to apply them, no use case is indefinitely generic -- it actually does matter what kind of content you're working with, and what you intend to do with it.
 
-In this case, I'm grounding my application on data from the [Open Beer Database](http://openbeerdb.com/). Although now defunct, when running it provided a database describing beers, noting their breweries, and categorizing the beers by style.
+In this case, I'm grounding my application on data from the [Open Beer Database](http://openbeerdb.com/), a dataset describing beers, categorizing them by style, and associating them with breweries. The dataset is no longer actively maintained, but for the purposes of this demo project this isn't a problem. Were I intending to get this in front of actual users, on the other hand, it would be important to make sure I was using a reliable, updated data set.
 
 This type of content naturally lends itself to both browsing and searching. That can already be pretty useful. Letting users create their own personal subset -- eg a "library" or "my collections" can add more value still. I've seen these two complementary use cases broadly termed "discovery" and "private curation." Both can get fairly complex. Take, for example, all the investment in machine learning happening in the "discovery" use case -- for instance improving search results, or personalized music or video recommendations.
 
