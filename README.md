@@ -26,8 +26,19 @@ In this project, I'm keeping things a lot simpler. The data set is finite, and f
 - styles
 - geocodes
 
-Although the database is no longer maintained, its creator has provided links to download the data as SQL and also in CSV format. Poking around in the CSV quickly reveals various challenges, as CSV's tend to do -- records with new lines in the middle of the description fields, too many commas, inconsistent number of columns per row, etc. Rather than spend time cleaning this up, it's easier to just fire up a MySQL database and run the provided SQL to recreate the tables. From there, I can either just use MySQL as the persistence layer (which I will in my initial implementation of the app), or export from there and import into some other persistence layer technology (which I do in later implementation variations).
+Although the database is no longer active, its creator has provided links to download the data as SQL and also in CSV format. Poking around in the CSV quickly reveals various challenges, as CSV's tend to do -- records with new lines in the middle of the description fields, too many commas, inconsistent number of columns per row, etc. Rather than spend time cleaning this up, it's easier to just fire up a MySQL database and run the provided SQL to recreate the tables. From there, I can either just use MySQL as the persistence layer (which I will in my initial implementation of the app), or export from there and import into some other persistence layer technology (which I do in later implementation variations).
+
+Docker is a nice tool for this, and it'll especially come in useful once I start implementing various variations of the different application layers and want to swap them out. Since I'm running this locally, [docker-compose](https://docs.docker.com/compose/) is a good fit. In my `docker-compose.yml`:
+
+```
+services:
+  db:
+    image: "mysql:8"
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+```
+
+Then `docker-compose up -d db`. Once it's running, `docker-compose exec db mysql -p -e 'CREATE DATABASE openbeerdb'`
+
 
 ## UI
-
-
