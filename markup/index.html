@@ -1,23 +1,32 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>Brewnotes</title>
   </head>
   <body>
     <header>
-      <h1>Brewnotes <small> Beers I've tried, and beers to try</small></h1>
+      <h1>Brewnotes<br /><small> Beers I've tried, and beers to try</small></h1>
       <nav>
         <ul>
-          <li><a href="/">Beer of the Day</a></li>
+          <li class="selected"><a href="/">Beer of the Day</a></li>
           <li><a href="/browse">Browse</a></li>
           <li><a href="/search">Search</a></li>
           <li><a href="/library">My Library</a></li>
         </ul>
       </nav>
-      <section id="botd">
-      </section>
-      <section id="browse"></section>
-      <section id="search"></section>
-      <section id="library"></section>
     </header>
+
+      <section id="botd">
+        <header>
+          <h2>Beer of the Day for Wednesday, September 12, 2018</h2>
+        </header>
+
+        <h3>Geist Bock</h3>
+        <p>This is one of our rare lagers brewed in the style of the German Heiliges Geist Bock, or Holy Ghost Bock. The name refers to the lighter nature of the beer as opposed to the darker and heavier Doppel Bock and Mai Bock also brewed during the spring in Germany. There is a rich malt flavor, a firm German style lager head, and a clean lagered finish to this beer.  Available on draft or in 12 oz. bottles.</p>
+
+        <div>
+          <button class="addToLibrary">Add to library</button>
+        </div>
+      </section>
   </body>
 </html>
