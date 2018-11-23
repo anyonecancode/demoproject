@@ -1,2 +1,4 @@
 data/
 .DS_Store
+flask/venv
+__pycache__/

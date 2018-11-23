@@ -1,0 +1,108 @@
+body, html {
+  height: 100%;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #333;
+  background: #eee;
+}
+
+a {
+  text-decoration:none;
+}
+
+#pageheader {
+ background: black;
+ color: wheat;
+ border-bottom: thick double gold;
+ display: flex;
+ padding: 1em;
+ margin: 0 0 2em;
+}
+
+#pageheader h1 {
+  font-size: 1.2em;
+  font-family: serif;
+}
+
+#pageheader h1>small {
+  font-family: cursive;
+  font-size: 0.75em;
+}
+
+#pageheader nav {
+  display: flex;
+  margin: auto;
+  margin-right:0
+}
+
+#pageheader nav a {
+  color: wheat;
+}
+
+#pageheader nav a:hover {
+  border-bottom: 1px solid green;
+}
+
+#pageheader nav .selected a {
+  border-bottom: 2px solid green;
+}
+
+
+#pageheader nav li {
+  display: inline-block;
+  margin: 0 0.5em;
+  }
+
+#main {
+  display: flex;
+  flex-direction: column;
+  min-height: 90%;
+  align-items: stretch;
+}
+
+#content {
+  padding: 0 1em;
+  flex-grow: 1;
+}
+
+h2 {
+  font-size: 1.2em;
+  padding: 0 0 1em;
+}
+
+h3 {
+  font-size: 1.1em;
+  padding: 0 0 0.5em;
+}
+
+
+#botd {
+  max-width: 50em;
+  margin: 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+  background: black;
+  color: wheat;
+  border-top: thick double gold;
+  margin: 1.2em 0 0;
+}
+
+.cta-block {
+  margin: 1em 0;
+}
+
+.cta-block a {
+  color: #333;
+  display: inline-block;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 0.45em;
+}
+
+.cta-block a:hover {
+  background: lightgray;
+}
