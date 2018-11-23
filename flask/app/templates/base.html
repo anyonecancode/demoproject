@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Brewnotes {% if title %} | {{ title }} {% endif %} </title>
+    <link href="{{ url_for('static', filename='css/reset.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/site.css') }}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header id="pageheader">
+      <h1>Brewnotes<br /><small>Beers tried, and beers to try</small></h1>
+      <nav>
+        <ul>
+          <li class="selected"><a href="/">Beer of the Day</a></li>
+          <li><a href="/explore">Search and Browse</a></li>
+          <li><a href="/library">My Library</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="main">
+      <section id="content">
+        {% block content %}{% endblock %}
+      </section><!--content-->
+      <footer>
+        <p>lorem ipsum</p>
+      </footer>
+    </div><!--main-->
+  </body>
+</html>
