@@ -59,14 +59,14 @@ small {
   margin: 0 0.5em;
   }
 
-#main {
+#content {
   display: flex;
   flex-direction: column;
   min-height: 90%;
   align-items: stretch;
 }
 
-#content {
+#main {
   padding: 0 1em;
   flex-grow: 1;
 }
