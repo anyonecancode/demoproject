@@ -4,9 +4,9 @@ class Beer(db.Model):
     __tablename__ = 'beers'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    brewery_id = db.Column(db.Integer)
-    cat_id = db.Column(db.Integer)
-    style_id = db.Column(db.Integer)
+    brewery_id = db.Column(db.Integer, db.ForeignKey('breweries.id'), index=True)
+    cat_id = db.Column(db.Integer, index=True)
+    style_id = db.Column(db.Integer, index=True)
     abv = db.Column(db.Float)
     ibu = db.Column(db.Float)
     upc = db.Column(db.Integer)
@@ -35,6 +35,7 @@ class Brewery(db.Model):
     descript = db.Column(db.Text())
     add_user = db.Column(db.Integer)
     last_mod = db.Column(db.DateTime)
+    beers = db.relationship('Beer', backref='brewery', lazy=True)
 
     def __repr__(self):
         return '<Brewery {}>'.format(self.name)
