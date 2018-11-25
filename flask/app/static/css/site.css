@@ -12,6 +12,10 @@ a {
   text-decoration:none;
 }
 
+small {
+  font-size:80%;
+}
+
 #pageheader {
  background: black;
  color: wheat;
