@@ -7,24 +7,26 @@
     <link href="{{ url_for('static', filename='css/site.css') }}" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <header id="pageheader">
-      <h1>Brewnotes<br /><small>Beers tried, and beers to try</small></h1>
-      <nav>
-        <ul>
-          <li class="selected"><a href="/">Beer of the Day</a></li>
-          <li><a href="/explore">Search and Browse</a></li>
-          <li><a href="/library">My Library</a></li>
-        </ul>
-      </nav>
-    </header>
-
     <div id="content">
-      <section id="main">
+      <header id="pageheader">
+        <h1>Brewnotes<br /><small>Beers tried, and beers to try</small></h1>
+        <nav>
+          <ul>
+            <li class="selected"><a href="/">Beer of the Day</a></li>
+            <li><a href="/explore">Search and Browse</a></li>
+            <li><a href="/library">My Library</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
         {% block content %}{% endblock %}
-      </section><!--content-->
+      </main>
+
       <footer>
         <p>lorem ipsum</p>
       </footer>
-    </div><!--main-->
+
+    </div><!--content-->
   </body>
 </html>
