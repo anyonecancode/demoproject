@@ -12,9 +12,8 @@
         <h1>Brewnotes<br /><small>Beers tried, and beers to try</small></h1>
         <nav>
           <ul>
-            <li class="selected"><a href="/">Beer of the Day</a></li>
-            <li><a href="/explore">Search and Browse</a></li>
-            <li><a href="/library">My Library</a></li>
+            <li {% if section == 'home' %}class="selected"{% endif %}><a href="{{ url_for('index') }}">Beer of the Day</a></li>
+            <li {% if section == 'explore' %}class="selected"{% endif %}><a href="{{url_for('explore') }}">Search and Browse</a></li>
           </ul>
         </nav>
       </header>

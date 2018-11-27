@@ -10,7 +10,12 @@ body {
 }
 
 a {
+  color: green;
   text-decoration:none;
+}
+
+a:hover {
+  text-decoration: underline
 }
 
 small {
@@ -85,7 +90,7 @@ h3 {
 
 #botd {
   max-width: 50em;
-  margin: 0 auto;
+  margin: 0 auto 2em;
 }
 
 #pageheader, main, footer {
@@ -98,7 +103,7 @@ footer {
   border-top: thick double gold;
 }
 
-.cta-block {
+.cta-block,  .more_block {
   margin: 1em 0;
 }
 
