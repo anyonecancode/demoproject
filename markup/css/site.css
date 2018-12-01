@@ -1,5 +1,6 @@
 body, html {
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -9,7 +10,16 @@ body {
 }
 
 a {
+  color: green;
   text-decoration:none;
+}
+
+a:hover {
+  text-decoration: underline
+}
+
+small {
+  font-size:80%;
 }
 
 #pageheader {
@@ -55,14 +65,14 @@ a {
   margin: 0 0.5em;
   }
 
-#main {
+#content {
   display: flex;
   flex-direction: column;
-  min-height: 90%;
+  min-height: 100%;
   align-items: stretch;
 }
 
-#content {
+main {
   padding: 0 1em;
   flex-grow: 1;
 }
@@ -80,18 +90,20 @@ h3 {
 
 #botd {
   max-width: 50em;
-  margin: 0 auto;
+  margin: 0 auto 2em;
+}
+
+#pageheader, main, footer {
+  flex-shrink: 0;
 }
 
 footer {
-  flex-shrink: 0;
   background: black;
   color: wheat;
   border-top: thick double gold;
-  margin: 1.2em 0 0;
 }
 
-.cta-block {
+.cta-block,  .more_block {
   margin: 1em 0;
 }
 
