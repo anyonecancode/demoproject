@@ -1,5 +1,6 @@
 from flask import render_template
 from app import app
+from app.models import Beer
 
 @app.route('/')
 def index():
@@ -14,4 +15,16 @@ def explore(category = None, style = None):
     section = 'explore'
     template = 'searchresults.html'
 
-    return render_template(template, title = title, section = 'explore')
+    beers = Beer.query.all()
+
+    results = []
+    for b in beers:
+        results.append({
+            'beer': b.name
+            ,'category': b.category
+            ,'style': b.style
+            ,'abv': b.abv
+            ,'brewery': b.brewery
+                })
+
+    return render_template(template, title = title, section = 'explore', results = results)

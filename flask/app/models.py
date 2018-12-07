@@ -5,8 +5,8 @@ class Beer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     brewery_id = db.Column(db.Integer, db.ForeignKey('breweries.id'), index=True)
-    cat_id = db.Column(db.Integer, index=True)
-    style_id = db.Column(db.Integer, index=True)
+    cat_id = db.Column(db.Integer, db.ForeignKey('categories.id'), index=True)
+    style_id = db.Column(db.Integer, db.ForeignKey('styles.id'), index=True)
     abv = db.Column(db.Float)
     ibu = db.Column(db.Float)
     upc = db.Column(db.Integer)
@@ -40,6 +40,7 @@ class Brewery(db.Model):
     def __repr__(self):
         return '<Brewery {}>'.format(self.name)
 
+
 class BreweryGeocode(db.Model):
     __tablename__ = 'breweries_geocode'
     id = db.Column(db.Integer, primary_key=True)
@@ -53,16 +54,19 @@ class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column('cat_name', db.String(255))
+    beers = db.relationship('Beer', backref='category', lazy=True)
     last_mod = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<Category {}>'.format(self.name)
+
 
 class Style(db.Model):
     __tablename__ = 'styles'
     id = db.Column(db.Integer, primary_key=True)
     cat_id = db.Column(db.Integer)
     name = db.Column('style_name', db.String(255))
+    beers = db.relationship('Beer', backref='style', lazy=True)
     last_mod = db.Column(db.DateTime)
 
     def __repr__(self):
