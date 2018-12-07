@@ -118,3 +118,65 @@ footer {
 .cta-block a:hover {
   background: lightgray;
 }
+
+
+
+#resultstable {
+  border-collapse: collapse;
+  box-shadow: 0px 0px 1px #555;
+  border-radius: 8px 8px 0 0;
+}
+
+#resultstable
+  thead {
+    color: #fff;
+    font-family: Times New Roman, serif;
+    font-weight: bold;
+    vertical-align: baseline;
+}
+
+#resultstable
+  thead
+    .tbl_header_border {
+      border-right: 1px solid #fff;
+    }
+
+#resultstable
+  thead
+    .tbl_header_left {
+      border-radius: 8px 0 0;
+    }
+
+#resultstable
+  thead
+    .tbl_header_right {
+      border-radius: 0 8px 0 0;
+    }
+
+#resultstable
+  thead
+    .subhead {
+      font-size: 0.85em;
+    }
+
+#resultstable
+  td, th {
+    padding: 0.5rem;
+}
+
+#resultstable
+  th {
+    background: grey;
+  }
+
+#resultstable
+  tbody
+    tr:nth-child(even) {
+      background: lightgray;
+    }
+
+#resultstable
+  tbody
+    tr:hover {
+      background: lightsteelblue;
+    }
