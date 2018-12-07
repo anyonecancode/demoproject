@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   height: 100%;
   width: 100%;
 }
@@ -12,9 +13,7 @@ body {
 a {
   color: green;
   text-decoration:none;
-}
-
-a:hover {
+} a:hover {
   text-decoration: underline
 }
 
@@ -23,39 +22,51 @@ small {
 }
 
 #pageheader {
- background: black;
- color: wheat;
- border-bottom: thick double gold;
- display: flex;
- padding: 1em;
- margin: 0 0 2em;
+  background: black;
+  color: wheat;
+  border-bottom: thick double gold;
+  padding: 1em;
+  margin: 0 0 2em;
 }
 
-#pageheader h1 {
+#pageheader
+#headerblock {
+  display: flex;
+  max-width: 60em;
+  margin: 0 auto;
+}
+
+#pageheader
+h1 {
   font-size: 1.2em;
   font-family: serif;
 }
 
-#pageheader h1>small {
+#pageheader
+h1>small {
   font-family: cursive;
   font-size: 0.75em;
 }
 
-#pageheader nav {
+#pageheader
+nav {
   display: flex;
   margin: auto;
   margin-right:0
 }
 
-#pageheader nav a {
+#pageheader
+nav
+a {
   color: wheat;
-}
-
-#pageheader nav a:hover {
+} #pageheader nav a:hover {
   border-bottom: 1px solid green;
 }
 
-#pageheader nav .selected a {
+#pageheader
+nav
+.selected
+a {
   border-bottom: 2px solid green;
 }
 
@@ -63,7 +74,7 @@ small {
 #pageheader nav li {
   display: inline-block;
   margin: 0 0.5em;
-  }
+}
 
 #content {
   display: flex;
@@ -88,9 +99,13 @@ h3 {
 }
 
 
-#botd {
-  max-width: 50em;
+#contentblock {
+  max-width: 60em;
   margin: 0 auto 2em;
+}
+
+#headerblock {
+  flex-shrink: 0;
 }
 
 #pageheader, main, footer {
@@ -117,4 +132,70 @@ footer {
 
 .cta-block a:hover {
   background: lightgray;
+}
+
+#resultstable {
+  border-collapse: collapse;
+  box-shadow: 0px 0px 1px #555;
+  border-radius: 8px 8px 0 0;
+}
+
+#resultstable
+thead {
+  color: #fff;
+  font-family: Times New Roman, serif;
+  font-weight: bold;
+  vertical-align: baseline;
+}
+
+#resultstable
+thead
+.tbl_header_border {
+  border-right: 1px solid #fff;
+}
+
+#resultstable
+thead
+.tbl_header_left {
+  border-radius: 8px 0 0;
+}
+
+#resultstable
+thead
+.tbl_header_right {
+  border-radius: 0 8px 0 0;
+}
+
+#resultstable
+thead
+.subhead {
+  font-size: 0.85em;
+}
+
+#resultstable
+td, th {
+  padding: 0.5rem;
+}
+
+#resultstable
+th {
+  background: grey;
+}
+
+#resultstable
+tbody
+td {
+  vertical-align: bottom;
+}
+
+#resultstable
+tbody
+tr:nth-child(even) {
+  background: lightgray;
+}
+
+#resultstable
+tbody
+tr:hover {
+  background: lightsteelblue;
 }

@@ -9,6 +9,7 @@
   <body>
     <div id="content">
       <header id="pageheader">
+        <div id="headerblock">
         <h1>Brewnotes<br /><small>Beers tried, and beers to try</small></h1>
         <nav>
           <ul>
@@ -16,10 +17,13 @@
             <li {% if section == 'explore' %}class="selected"{% endif %}><a href="{{url_for('explore') }}">Search and Browse</a></li>
           </ul>
         </nav>
+        </div>
       </header>
 
       <main>
+        <div id="contentblock">
         {% block content %}{% endblock %}
+        </div>
       </main>
 
       <footer>

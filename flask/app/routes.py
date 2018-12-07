@@ -12,11 +12,6 @@ def index():
 def explore(category = None, style = None):
     title = 'Explore'
     section = 'explore'
-
-    template = 'explore.html'
-    if category:
-        template = 'explore.category.html'
-    if style:
-        template = 'explore.category.style.html'
+    template = 'searchresults.html'
 
     return render_template(template, title = title, section = 'explore')
