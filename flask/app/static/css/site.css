@@ -88,6 +88,11 @@ main {
   flex-grow: 1;
 }
 
+h1 {
+  font-size: 1.4em;
+  padding: 0 0 1em;
+}
+
 h2 {
   font-size: 1.2em;
   padding: 0 0 1em;
@@ -198,4 +203,17 @@ tr:nth-child(even) {
 tbody
 tr:hover {
   background: lightsteelblue;
+}
+
+#resultstable
+tfoot {
+  background: grey;
+  color: #fff;
+  text-align: right;
+}
+
+#resultstable
+tfoot
+td {
+  padding: 0.3rem;
 }
