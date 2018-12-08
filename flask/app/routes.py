@@ -17,35 +17,9 @@ def explore(category = None, style = None):
     template = 'searchresults.html'
 
     q = Beer.query
-    orderby = Beer.name
-    orderDesc = False
-    orderbyField = None
 
-    orderbyparam = request.args.get('orderby', None, str)
-    if (orderbyparam):
-        parts = orderbyparam.split('|')
-        orderbyField = parts[0]
-        if len(parts) == 2 and parts[1].lower() == 'desc':
-            orderDesc = True
-
-    if orderbyField:
-        if orderbyField == 'category':
-            q = q.join(Category)
-            orderby = Category.name
-        if orderbyField == 'brewery':
-            q = q.join(Brewery)
-            orderby = Brewery.name
-        if orderbyField == 'region':
-            q = q.join(Brewery)
-            orderby = Brewery.state
-        if orderbyField == 'country':
-            q = q.join(Brewery)
-            orderby = Brewery.country
-
-    if orderDesc:
-        orderby = orderby.desc()
-
-    q = q.order_by(orderby)
+    orderby = request.args.get('orderby', None, str)
+    q = _buildOrderyByQuery(q, orderby)
 
     count = q.count()
     pagination = q.paginate(page,25)
@@ -64,8 +38,34 @@ def explore(category = None, style = None):
             'resultscount': count
             ,'page': pagination.page
             ,'pages': pagination.pages
-            ,'prev': url_for('explore', page=pagination.prev_num) if pagination.has_prev else None
-            ,'next': url_for('explore', page=pagination.next_num) if pagination.has_next else None
+            ,'prev': url_for('explore', page=pagination.prev_num, orderby=orderby) if pagination.has_prev else None
+            ,'next': url_for('explore', page=pagination.next_num, orderby=orderby) if pagination.has_next else None
             }
     print(pagecontrols['next'])
     return render_template(template, title = title, section = 'explore', results = results, pagecontrols = pagecontrols)
+
+
+def _buildOrderyByQuery(baseQuery, orderbyparams):
+    orderby = Beer.name #Default
+
+    if orderbyparams is None:
+        return baseQuery.order_by(orderby.asc())
+
+    parts = orderbyparams.split('|')
+    orderbyField = parts[0]
+    orderDesc = True if (len(parts) == 2 and parts[1].lower() == 'desc') else False
+
+    if orderbyField == 'category':
+        baseQuery = baseQuery.join(Category)
+        orderby = Category.name
+    if orderbyField == 'brewery':
+        baseQuery = baseQuery.join(Brewery)
+        orderby = Brewery.name
+    if orderbyField == 'country':
+        baseQuery = baseQuery.join(Brewery)
+        orderby = Brewery.country
+
+    if orderDesc:
+        orderby = orderby.desc()
+
+    return baseQuery.order_by(orderby)
