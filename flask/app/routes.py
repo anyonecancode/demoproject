@@ -51,8 +51,15 @@ def explore(category = None, style = None):
             'resultscount': count
             ,'page': pagination.page
             ,'pages': pagination.pages
-            ,'prev': url_for('explore', page=pagination.prev_num, orderby=orderarg) if pagination.has_prev else None
-            ,'next': url_for('explore', page=pagination.next_num, orderby=orderarg) if pagination.has_next else None
+            ,'prev': url_for('explore',
+                page=pagination.prev_num
+                ,orderby=orderarg
+                ,filterby=filterargs
+                ) if pagination.has_prev else None
+            ,'next': url_for('explore'
+                ,page=pagination.next_num
+                ,orderby=orderarg
+                ,filterby=filterargs) if pagination.has_next else None
             }
     return render_template(template, title = title, section = 'explore', results = results, pagecontrols = pagecontrols)
 
