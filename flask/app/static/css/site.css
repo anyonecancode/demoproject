@@ -25,7 +25,7 @@ small {
   background: black;
   color: wheat;
   border-bottom: thick double gold;
-  padding: 1em;
+  padding: 1em 0 0;
   margin: 0 0 2em;
 }
 
