@@ -1,0 +1,19 @@
+- Figure out how to create and populate mysql db in docker container
+  -- copying files in then running bash to do the updates is not really workable...
+
+
+Features
+- Login
+- Library
+- Search
+
+Infra:
+- Postgres
+- Elasticsearch?
+- Vue.js + Redux
+- React without Redux, and TS
+- GraphQL...
+- Spring + Angular
+- Node
+- Elm + Yesod
+- Rust/Rocket
