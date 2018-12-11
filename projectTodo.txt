@@ -17,3 +17,6 @@ Infra:
 - Node
 - Elm + Yesod
 - Rust/Rocket
+
+Tweaks
+- number formatter (eg thousands results on browse page)

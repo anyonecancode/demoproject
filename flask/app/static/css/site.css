@@ -17,39 +17,24 @@ a {
   text-decoration: underline
 }
 
+p {
+  padding: 0.25em 0;
+}
+
 small {
   font-size:80%;
 }
 
-#pageheader {
-  background: black;
-  color: wheat;
-  border-bottom: thick double gold;
-  padding: 1em 0 0;
-  margin: 0 0 2em;
-}
+
 
 #pageheader
-#headerblock {
-  display: flex;
-  max-width: 60em;
-  margin: 0 auto;
-}
-
-#pageheader
-h1 {
-  font-size: 1.2em;
-  font-family: serif;
-}
-
-#pageheader
-h1>small {
+  h1>small {
   font-family: cursive;
   font-size: 0.75em;
 }
 
 #pageheader
-nav {
+  nav {
   display: flex;
   margin: auto;
   margin-right:0
@@ -57,21 +42,23 @@ nav {
 
 #pageheader
 nav
-a {
+  a {
   color: wheat;
 } #pageheader nav a:hover {
   border-bottom: 1px solid green;
 }
 
 #pageheader
-nav
-.selected
-a {
+  nav
+    .selected
+      a {
   border-bottom: 2px solid green;
 }
 
 
-#pageheader nav li {
+#pageheader
+  nav
+    li {
   display: inline-block;
   margin: 0 0.5em;
 }
@@ -117,6 +104,26 @@ h3 {
   flex-shrink: 0;
 }
 
+#pageheader {
+  background: black;
+  color: wheat;
+  border-bottom: thick double gold;
+  padding: 1em 0 0;
+  margin: 0 0 2em;
+}
+
+#pageheader
+#headerblock {
+  display: flex;
+  max-width: 60em;
+  margin: 0 auto;
+}
+
+#pageheader
+  h1 {
+  font-size: 1.2em;
+  font-family: serif;
+}
 footer {
   background: black;
   color: wheat;
@@ -146,7 +153,7 @@ footer {
 }
 
 #resultstable
-thead {
+  thead {
   color: #fff;
   font-family: Times New Roman, serif;
   font-weight: bold;
@@ -154,28 +161,18 @@ thead {
 }
 
 #resultstable
-thead
-.tbl_header_border {
-  border-right: 1px solid #fff;
-}
-
+  thead
+    tr
+      th:first-child {
+        border-radius: 8px 0 0;
+      }
 #resultstable
-thead
-.tbl_header_left {
-  border-radius: 8px 0 0;
-}
+  thead
+    tr
+      th:last-child {
+        border-radius: 0 8px 0 0;
+      }
 
-#resultstable
-thead
-.tbl_header_right {
-  border-radius: 0 8px 0 0;
-}
-
-#resultstable
-thead
-.subhead {
-  font-size: 0.85em;
-}
 
 #resultstable
 td, th {
@@ -185,35 +182,50 @@ td, th {
 #resultstable
 th {
   background: grey;
+  white-space: nowrap;
 }
 
 #resultstable
-tbody
-td {
+  tbody
+    td {
   vertical-align: bottom;
 }
 
 #resultstable
-tbody
-tr:nth-child(even) {
+  tbody
+    tr:nth-child(even) {
   background: lightgray;
 }
 
 #resultstable
-tbody
-tr:hover {
+  tbody
+    tr:hover {
   background: lightsteelblue;
 }
 
 #resultstable
-tfoot {
+  tfoot {
   background: grey;
   color: #fff;
   text-align: right;
 }
 
 #resultstable
-tfoot
-td {
+  tfoot
+    td {
   padding: 0.3rem;
+}
+
+#searchinfo {
+  margin: 0 0 1em;
+}
+
+.orderby a {
+  color: #333;
+  font-size: 0.7em;
+}
+
+.orderby a.active {
+  color: ivory;
+  text-shadow: 0 0 3px gold;
 }

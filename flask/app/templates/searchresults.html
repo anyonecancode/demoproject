@@ -5,34 +5,59 @@
   <h1>Explore beers</h1>
 </header>
 
-<form id="searchform" action="/search" method="post">
-  <h2>Showing results for {{ searchterm if searchterm else 'All Records' }} ({{pagecontrols.resultscount}} records)</h2>
-  <div class="searchinfo">
-    <p>Page {{pagecontrols.page}} of {{pagecontrols.pages}} </p>
-    <p>
-      {% if pagecontrols.prev %}
-      <a href="{{pagecontrols.prev}}">« Previous</a>
-      {% endif %}
-      {% if pagecontrols.next %}
-      <a href="{{pagecontrols.next}}">Next »</a>
-      {% endif %}
-    </p>
-  </div>
-</form>
+<div id="searchinfo">
+  <p>Showing results for All Beers ({{pagecontrols.resultscount}} records)</p>
+  <p>Page {{pagecontrols.page}} of {{pagecontrols.pages}} </p>
+  <p>
+    {% if pagecontrols.prev %}
+    <a href="{{pagecontrols.prev}}">« Previous</a>
+    {% endif %}
+    {% if pagecontrols.next %}
+    <a href="{{pagecontrols.next}}">Next »</a>
+    {% endif %}
+  </p>
+</div>
 
 <table id="resultstable">
   <thead>
     <tr>
-      <th colspan="3" class="tbl_header_border tbl_header_left">Beer</th>
-      <th colspan="3" class="tbl_header_right">Brewery</th>
+      <th>
+        Beer
+        <span class="orderby">
+          <a href="{{pagecontrols.orderlink}}" {%if pagecontrols.orderarg == 'beer'%} class="active" {% endif %}>▲</a>
+          <a href="{{pagecontrols.orderlink}}&orderby=-beer" {%if pagecontrols.orderarg == '-beer'%} class="active" {% endif %}>▼</a>
+        </span>
+      </th>
+      <th>
+        Category and Style
+        <span class="orderby">
+          <a href="{{pagecontrols.orderlink}}&orderby=category" {%if pagecontrols.orderarg == 'category'%} class="active" {% endif %}>▲</a>
+          <a href="{{pagecontrols.orderlink}}&orderby=-category" {%if pagecontrols.orderarg == '-category'%} class="active" {% endif %}>▼</a>
+        </span>
+      </th>
+      <th>ABV</th>
+      <th>Brewery
+        <span class="orderby">
+          <a href="{{pagecontrols.orderlink}}&orderby=brewery"{%if pagecontrols.orderarg == 'brewery'%} class="active" {% endif %}>▲</a>
+          <a href="{{pagecontrols.orderlink}}&orderby=-brewery"{%if pagecontrols.orderarg == '-brewery'%} class="active" {% endif %}>▼</a>
+        </span>
+      </th>
+      <th>
+        State or Region
+        <span class="orderby">
+          <a href="{{pagecontrols.orderlink}}&orderby=region"{%if pagecontrols.orderarg == 'region'%} class="active" {% endif %}>▲</a>
+          <a href="{{pagecontrols.orderlink}}&orderby=-region"{%if pagecontrols.orderarg == '-region'%} class="active" {% endif %}>▼</a>
+        </span>
+      </th>
+      <th>
+        Country
+        <span class="orderby">
+          <a href="{{pagecontrols.orderlink}}&orderby=country"{%if pagecontrols.orderarg == 'country'%} class="active" {% endif %}>▲</a>
+          <a href="{{pagecontrols.orderlink}}&orderby=-country"{%if pagecontrols.orderarg == '-country'%} class="active" {% endif %}>▼</a>
+        </span>
+      </th>
     </tr>
-    <tr class="subhead">
-      <th>Name</th>
-      <th>Category and Style</th>
-      <th class="tbl_header_border">ABV</th>
-      <th>Name</th>
-      <th>State or Region</th>
-      <th>Country</th>
+    <tr>
     </tr>
   </thead>
   <tbody>

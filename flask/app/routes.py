@@ -60,6 +60,9 @@ def explore(category = None, style = None):
                 ,page=pagination.next_num
                 ,orderby=orderarg
                 ,filterby=filterargs) if pagination.has_next else None
+            ,'orderlink': url_for('explore',q=1,filterby=filterargs)
+            ,'orderarg': orderarg if orderarg else 'beer'
+            ,'filterargs': filterargs
             }
     return render_template(template, title = title, section = 'explore', results = results, pagecontrols = pagecontrols)
 
