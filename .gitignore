@@ -4,3 +4,4 @@ flask/venv
 __pycache__/
 *.swp
 target
+/.metadata/
