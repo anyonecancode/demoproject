@@ -18,6 +18,7 @@
   </p>
 </div>
 
+<form method="get" action="/explore">
 <table id="resultstable">
   <thead>
     <tr>
@@ -43,21 +44,169 @@
         </span>
       </th>
       <th>
-        State or Region
-        <span class="orderby">
-          <a href="{{pagecontrols.orderlink}}&orderby=region"{%if pagecontrols.orderarg == 'region'%} class="active" {% endif %}>▲</a>
-          <a href="{{pagecontrols.orderlink}}&orderby=-region"{%if pagecontrols.orderarg == '-region'%} class="active" {% endif %}>▼</a>
-        </span>
-      </th>
-      <th>
         Country
         <span class="orderby">
           <a href="{{pagecontrols.orderlink}}&orderby=country"{%if pagecontrols.orderarg == 'country'%} class="active" {% endif %}>▲</a>
           <a href="{{pagecontrols.orderlink}}&orderby=-country"{%if pagecontrols.orderarg == '-country'%} class="active" {% endif %}>▼</a>
         </span>
       </th>
+
+      <th>
+        State or Region
+        <span class="orderby">
+          <a href="{{pagecontrols.orderlink}}&orderby=region"{%if pagecontrols.orderarg == 'region'%} class="active" {% endif %}>▲</a>
+          <a href="{{pagecontrols.orderlink}}&orderby=-region"{%if pagecontrols.orderarg == '-region'%} class="active" {% endif %}>▼</a>
+        </span>
+      </th>
     </tr>
-    <tr>
+    <tr id="filter_row">
+      <th>&nbsp;</th>
+      <th>
+        <input type="checkbox" id="filter_category" />
+        <label for="filter_category">Show Filters</label>
+        <div>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {%if 'category|British Ale' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|British Ale"/>
+            British Ale</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|Irish Ale' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|Irish Ale"/>
+            Irish Ale</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|North American Pale Ale' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|North American Pale Ale"/>
+            North American Pale Ale</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|Germany Ale' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|German Ale"/>
+            German Ale</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|Belgium and French Ale' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|Belgian and French Ale"/>
+            Belgian and French Ale</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|International Ale' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|International Ale"/>
+            International Ale</label>
+          </span>
+          <span>
+            <label>
+            <input
+               type="checkbox"
+               name="filterby"
+               {% if 'category|German Lager' in pagecontrols.filterargs%}checked{% endif %}
+               value="category|German Lager"/>
+            German Lager</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|North American Lager' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|North American Lager"/>
+            North American Lager</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|Other Lager' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|Other Lager"/>
+            Other Lager</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|International Lager' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|International Lager"/>
+            International Lager</label>
+          </span>
+          <span>
+            <label>
+            <input
+              type="checkbox"
+              name="filterby"
+              {% if 'category|Other Style' in pagecontrols.filterargs%}checked{% endif %}
+              value="category|Other Style" />
+            Other Style</label>
+          </span>
+          <span>
+            <button type="submit">Apply Filters</button>
+          </span>
+        </div>
+      </th>
+      <th></th>
+      <th>
+      </th>
+      <th>
+        <input type="checkbox" id="filter_country" />
+        <label for="filter_country">Filters</label>
+        <div>
+          <span>
+            <input type="checkbox" id="f_us" />
+            <label for="f_nam">US and Canada</label>
+          </span>
+          <span>
+            <input type="checkbox" id="f_de" />
+            <label for="f_nam">Germany</label>
+          </span>
+          <span>
+            <input type="checkbox" id="f_bel" />
+            <label for="f_nam">Belgium</label>
+          </span>
+          <span>
+            <input type="checkbox" id="f_uk" />
+            <label for="f_nam">UK and Ireland</label>
+          </span>
+          <span>
+            <input type="checkbox" id="f_uk" />
+            <label for="f_nam">Australia and New Zealand</label>
+          </span>
+          <span>
+            <input type="checkbox" id="f_eu" />
+            <label for="f_nam">Other, Europe</label>
+          </span>
+          <span>
+            <input type="checkbox" id="f_w" />
+            <label for="f_nam">Other, World</label>
+          </span>
+        </div>
+      </th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -67,8 +216,8 @@
       <td>{% if r.category %}<a href="#">{{r.category.name}}</a>, <a href="#">{{r.style.name}}</a>{% endif %}</td>
       <td>4.5</td>
       <td>{% if r.brewery.name %}<a href="#">{{ r.brewery.name }}</a>{% endif %}</td>
-      <td>{% if r.brewery.state %}<a href="#">{{ r.brewery.state }}</a>{% endif %}</td>
       <td>{% if r.brewery.country %}<a href="#">{{ r.brewery.country }}</a>{% endif %}</td>
+      <td>{% if r.brewery.state %}<a href="#">{{ r.brewery.state }}</a>{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -90,4 +239,5 @@
     </tr>
   </tfoot>
 </table>
+</form>
 {% endblock %}

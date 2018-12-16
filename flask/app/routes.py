@@ -9,8 +9,6 @@ def index():
 
 
 @app.route('/explore')
-@app.route('/explore/<category>')
-@app.route('/explore/<category>/<style>')
 def explore(category = None, style = None):
     #Pagination support
     page = request.args.get('page', 1, type=int)
@@ -73,7 +71,11 @@ def _extractFromRequestargs(filterargs, orderarg):
     orderby = [Beer.name, False]
 
     for param in filterargs:
-        key, value = param.split('|')
+        key, *value = param.split('|', 1)
+
+        if not value:
+            continue
+
         filterkeys[key].append(value)
         if key.lower() == 'category':
             joined_models.add(Category)

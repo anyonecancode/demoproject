@@ -162,13 +162,13 @@ footer {
 
 #resultstable
   thead
-    tr
+    tr:first-child
       th:first-child {
         border-radius: 8px 0 0;
       }
 #resultstable
   thead
-    tr
+    tr:first-child
       th:last-child {
         border-radius: 0 8px 0 0;
       }
@@ -229,3 +229,25 @@ th {
   color: ivory;
   text-shadow: 0 0 3px gold;
 }
+
+#filter_row {
+  font-size: 0.8em;
+  font-weight: normal;
+  text-align: left;
+}
+
+#filter_row
+  div
+    span {
+      display: block;
+      padding: 0 0 0 1em;
+    }
+
+#filter_row
+  input ~ div {
+    display: none
+  }
+#filter_row
+  input:checked ~ div {
+    display: block
+  }
