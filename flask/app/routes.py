@@ -52,35 +52,19 @@ def explore():
     #Apply ordering (default to by beer name ASC if none)
     composed_query = _applyOrdering(composed_query, orderby)
 
-    count = composed_query.count()
-    pagination = composed_query.paginate(page,25, error_out=False)
+    results = composed_query.paginate(page,MAX_RESULTS_PER_PAGE, error_out=False)
 
-    results = []
-    for beer in pagination.items:
-        results.append({
-            'beer': beer.name
-            ,'category': beer.category
-            ,'style': beer.style
-            ,'abv': beer.abv
-            ,'brewery': beer.brewery
-                })
-
-    pagecontrols = {
-            'resultscount': count
-            ,'page': pagination.page
-            ,'pages': pagination.pages
-            ,'prev': url_for('explore',
-                page=pagination.prev_num
+    pager = {
+            'prev': url_for('explore',
+                page=results.prev_num
                 ,orderby=orderarg
                 ,filterby=filterargs
-                ) if pagination.has_prev else None
+                ) if results.has_prev else None
             ,'next': url_for('explore'
-                ,page=pagination.next_num
+                ,page=results.next_num
                 ,orderby=orderarg
-                ,filterby=filterargs) if pagination.has_next else None
+                ,filterby=filterargs) if results.has_next else None
             ,'orderlink': url_for('explore',q=1,filterby=filterargs)
-            ,'orderarg': orderarg if orderarg else 'beer'
-            ,'filterargs': filterargs
             }
 
     return render_template(
@@ -88,7 +72,9 @@ def explore():
             ,section=VIEWS['explore']['section']
             ,title=VIEWS['explore']['title']
             ,results = results
-            ,pagecontrols = pagecontrols)
+            ,pager = pager
+            ,ordered_by = orderarg if orderarg else 'beer'
+            ,filtered_by = filterargs)
 
 
 def _extractFromRequestargs(filterargs, orderarg):

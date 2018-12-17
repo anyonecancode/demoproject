@@ -6,18 +6,19 @@
 </header>
 
 <div id="searchinfo">
-  <p>Showing results for All Beers ({{pagecontrols.resultscount}} records)</p>
-  <p>Page {{pagecontrols.page}} of {{pagecontrols.pages}} </p>
+  <p>Showing results for All Beers ({{results.total}} records)</p>
+  <p>Page {{results.page}} of {{results.pages}} </p>
   <p>
-    {% if pagecontrols.prev %}
-    <a href="{{pagecontrols.prev}}">« Previous</a>
+    {% if pager.prev %}
+    <a href="{{pager.prev}}">« Previous</a>
     {% endif %}
-    {% if pagecontrols.next %}
-    <a href="{{pagecontrols.next}}">Next »</a>
+    {% if pager.next %}
+    <a href="{{pager.next}}">Next »</a>
     {% endif %}
   </p>
 </div>
 
+{% if results.items %}
 <form method="get" action="/explore">
 <table id="resultstable">
   <thead>
@@ -25,37 +26,37 @@
       <th>
         Beer
         <span class="orderby">
-          <a href="{{pagecontrols.orderlink}}" {%if pagecontrols.orderarg == 'beer'%} class="active" {% endif %}>▲</a>
-          <a href="{{pagecontrols.orderlink}}&orderby=-beer" {%if pagecontrols.orderarg == '-beer'%} class="active" {% endif %}>▼</a>
+          <a href="{{pager.orderlink}}" {%if ordered_by == 'beer'%} class="active" {% endif %}>▲</a>
+          <a href="{{pager.orderlink}}&orderby=-beer" {%if ordered_by == '-beer'%} class="active" {% endif %}>▼</a>
         </span>
       </th>
       <th>
         Category and Style
         <span class="orderby">
-          <a href="{{pagecontrols.orderlink}}&orderby=category" {%if pagecontrols.orderarg == 'category'%} class="active" {% endif %}>▲</a>
-          <a href="{{pagecontrols.orderlink}}&orderby=-category" {%if pagecontrols.orderarg == '-category'%} class="active" {% endif %}>▼</a>
+          <a href="{{pager.orderlink}}&orderby=category" {%if ordered_by == 'category'%} class="active" {% endif %}>▲</a>
+          <a href="{{pager.orderlink}}&orderby=-category" {%if ordered_by == '-category'%} class="active" {% endif %}>▼</a>
         </span>
       </th>
       <th>ABV</th>
       <th>Brewery
         <span class="orderby">
-          <a href="{{pagecontrols.orderlink}}&orderby=brewery"{%if pagecontrols.orderarg == 'brewery'%} class="active" {% endif %}>▲</a>
-          <a href="{{pagecontrols.orderlink}}&orderby=-brewery"{%if pagecontrols.orderarg == '-brewery'%} class="active" {% endif %}>▼</a>
+          <a href="{{pager.orderlink}}&orderby=brewery"{%if ordered_by == 'brewery'%} class="active" {% endif %}>▲</a>
+          <a href="{{pager.orderlink}}&orderby=-brewery"{%if ordered_by == '-brewery'%} class="active" {% endif %}>▼</a>
         </span>
       </th>
       <th>
         Country
         <span class="orderby">
-          <a href="{{pagecontrols.orderlink}}&orderby=country"{%if pagecontrols.orderarg == 'country'%} class="active" {% endif %}>▲</a>
-          <a href="{{pagecontrols.orderlink}}&orderby=-country"{%if pagecontrols.orderarg == '-country'%} class="active" {% endif %}>▼</a>
+          <a href="{{pager.orderlink}}&orderby=country"{%if ordered_by == 'country'%} class="active" {% endif %}>▲</a>
+          <a href="{{pager.orderlink}}&orderby=-country"{%if ordered_by == '-country'%} class="active" {% endif %}>▼</a>
         </span>
       </th>
 
       <th>
         State or Region
         <span class="orderby">
-          <a href="{{pagecontrols.orderlink}}&orderby=region"{%if pagecontrols.orderarg == 'region'%} class="active" {% endif %}>▲</a>
-          <a href="{{pagecontrols.orderlink}}&orderby=-region"{%if pagecontrols.orderarg == '-region'%} class="active" {% endif %}>▼</a>
+          <a href="{{pager.orderlink}}&orderby=region"{%if ordered_by == 'region'%} class="active" {% endif %}>▲</a>
+          <a href="{{pager.orderlink}}&orderby=-region"{%if ordered_by == '-region'%} class="active" {% endif %}>▼</a>
         </span>
       </th>
     </tr>
@@ -70,7 +71,7 @@
             <input
               type="checkbox"
               name="filterby"
-              {%if 'category|British Ale' in pagecontrols.filterargs%}checked{% endif %}
+              {%if not filtered_by or 'category|British Ale' in filtered_by%}checked{% endif %}
               value="category|British Ale"/>
             British Ale</label>
           </span>
@@ -79,7 +80,7 @@
             <input
               type="checkbox"
               name="filterby"
-              {% if 'category|Irish Ale' in pagecontrols.filterargs%}checked{% endif %}
+              {% if not filtered_by or 'category|Irish Ale' in filtered_by%}checked{% endif %}
               value="category|Irish Ale"/>
             Irish Ale</label>
           </span>
@@ -88,16 +89,16 @@
             <input
               type="checkbox"
               name="filterby"
-              {% if 'category|North American Pale Ale' in pagecontrols.filterargs%}checked{% endif %}
-              value="category|North American Pale Ale"/>
-            North American Pale Ale</label>
+              {% if not filtered_by or 'category|North American Ale' in filtered_by%}checked{% endif %}
+              value="category|North American Ale"/>
+            North American Ale</label>
           </span>
           <span>
             <label>
             <input
               type="checkbox"
               name="filterby"
-              {% if 'category|Germany Ale' in pagecontrols.filterargs%}checked{% endif %}
+              {% if not filtered_by or 'category|German Ale' in filtered_by%}checked{% endif %}
               value="category|German Ale"/>
             German Ale</label>
           </span>
@@ -106,25 +107,16 @@
             <input
               type="checkbox"
               name="filterby"
-              {% if 'category|Belgium and French Ale' in pagecontrols.filterargs%}checked{% endif %}
+              {% if not filtered_by or 'category|Belgian and French Ale' in filtered_by%}checked{% endif %}
               value="category|Belgian and French Ale"/>
             Belgian and French Ale</label>
           </span>
           <span>
             <label>
             <input
-              type="checkbox"
-              name="filterby"
-              {% if 'category|International Ale' in pagecontrols.filterargs%}checked{% endif %}
-              value="category|International Ale"/>
-            International Ale</label>
-          </span>
-          <span>
-            <label>
-            <input
                type="checkbox"
                name="filterby"
-               {% if 'category|German Lager' in pagecontrols.filterargs%}checked{% endif %}
+               {% if not filtered_by or 'category|German Lager' in filtered_by%}checked{% endif %}
                value="category|German Lager"/>
             German Lager</label>
           </span>
@@ -133,7 +125,7 @@
             <input
               type="checkbox"
               name="filterby"
-              {% if 'category|North American Lager' in pagecontrols.filterargs%}checked{% endif %}
+              {% if not filtered_by or 'category|North American Lager' in filtered_by%}checked{% endif %}
               value="category|North American Lager"/>
             North American Lager</label>
           </span>
@@ -142,7 +134,7 @@
             <input
               type="checkbox"
               name="filterby"
-              {% if 'category|Other Lager' in pagecontrols.filterargs%}checked{% endif %}
+              {% if not filtered_by or 'category|Other Lager' in filtered_by%}checked{% endif %}
               value="category|Other Lager"/>
             Other Lager</label>
           </span>
@@ -151,16 +143,7 @@
             <input
               type="checkbox"
               name="filterby"
-              {% if 'category|International Lager' in pagecontrols.filterargs%}checked{% endif %}
-              value="category|International Lager"/>
-            International Lager</label>
-          </span>
-          <span>
-            <label>
-            <input
-              type="checkbox"
-              name="filterby"
-              {% if 'category|Other Style' in pagecontrols.filterargs%}checked{% endif %}
+              {% if not filtered_by or 'category|Other Style' in filtered_by%}checked{% endif %}
               value="category|Other Style" />
             Other Style</label>
           </span>
@@ -210,9 +193,9 @@
     </tr>
   </thead>
   <tbody>
-    {% for r in results %}
+    {% for r in results.items %}
     <tr>
-      <td class="beername"><a href="#">{{ r.beer }}</a></td>
+      <td class="beername"><a href="#">{{ r.name }}</a></td>
       <td>{% if r.category %}<a href="#">{{r.category.name}}</a>, <a href="#">{{r.style.name}}</a>{% endif %}</td>
       <td>4.5</td>
       <td>{% if r.brewery.name %}<a href="#">{{ r.brewery.name }}</a>{% endif %}</td>
@@ -224,20 +207,21 @@
   <tfoot id="tfoot">
     <tr>
       <td colspan="6">
-        Page {{pagecontrols.page}} of {{pagecontrols.pages}}
+        Page {{pager.page}} of {{pager.pages}}
       </td>
     </tr>
     <tr>
       <td colspan="6">
-        {% if pagecontrols.prev %}
-        <a href="{{pagecontrols.prev}}#tfoot">« Previous</a>
+        {% if pager.prev %}
+        <a href="{{pager.prev}}#tfoot">« Previous</a>
         {% endif %}
-        {% if pagecontrols.next %}
-        <a href="{{pagecontrols.next}}#tfoot">Next »</a>
+        {% if pager.next %}
+        <a href="{{pager.next}}#tfoot">Next »</a>
         {% endif %}
       </td>
     </tr>
   </tfoot>
 </table>
 </form>
+{% endif %}
 {% endblock %}
