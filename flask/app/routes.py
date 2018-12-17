@@ -4,18 +4,37 @@ from app.models import Beer, Category, Brewery
 #from app.urltools import paginated
 from collections import defaultdict
 
+#Routing constants
+VIEWS = {
+    'home': {
+        'template': 'index.html'
+        ,'section': 'home'
+        ,'title': None
+        }
+    ,'explore': {
+        'template': 'searchresults.html'
+        ,'section': 'browse'
+        ,'title': 'Explore'
+        }
+    }
+
+#Pagination constants
+#In a larger app, might go in separate config or constants file, but
+#the current app is small enough it makes more sense to keep it closer
+#to where it is used
+MAX_RESULTS_PER_PAGE = 25
+
 @app.route('/')
 def index():
-    return render_template('index.html', section='home')
+    return render_template(
+            VIEWS['home']['template']
+            ,section=VIEWS['home']['section'])
 
 
 @app.route('/explore')
-def explore(category = None, style = None):
+def explore():
     #Pagination support
     page = request.args.get('page', 1, type=int)
-    title = 'Explore'
-    section = 'explore'
-    template = 'searchresults.html'
     #Default query. Simple SELECT FROM beers if no filter or sort, and the base we join against otherwise.
     base_query = Beer.query
 
@@ -63,7 +82,13 @@ def explore(category = None, style = None):
             ,'orderarg': orderarg if orderarg else 'beer'
             ,'filterargs': filterargs
             }
-    return render_template(template, title = title, section = 'explore', results = results, pagecontrols = pagecontrols)
+
+    return render_template(
+            VIEWS['explore']['template']
+            ,section=VIEWS['explore']['section']
+            ,title=VIEWS['explore']['title']
+            ,results = results
+            ,pagecontrols = pagecontrols)
 
 
 def _extractFromRequestargs(filterargs, orderarg):
