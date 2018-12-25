@@ -1,7 +1,6 @@
 from flask import render_template, request, url_for
 from app import app
 from app.models import Beer, Category, Brewery
-#from app.urltools import paginated
 from collections import defaultdict
 
 #Routing constants

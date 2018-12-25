@@ -3,3 +3,5 @@ data/
 flask/venv
 __pycache__/
 *.swp
+.metadata/
+migrations/
