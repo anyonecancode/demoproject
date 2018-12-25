@@ -34,8 +34,9 @@ def index():
 def explore():
     #Pagination support
     page = request.args.get('page', 1, type=int)
+
     #Default query. Simple SELECT FROM beers if no filter or sort, and the base we join against otherwise.
-    base_query = Beer.query
+    query = Beer.query
 
     #Filtering and sorting requires setting up some table joins. Determine what the joins are and,
     #while we're at it, prep our data for applying soting and filtering a few lines later
@@ -43,15 +44,15 @@ def explore():
     orderarg = request.args.get('orderby', None, str)
     joined_models, filterkeys, orderby = _extractFromRequestargs(filterargs, orderarg)
     for m in joined_models:
-        base_query =  base_query.join(m)
+        query =  query.join(m)
 
     #Apply filters, if any
-    composed_query = _applyFilters(base_query, filterkeys)
+    query = _applyFilters(query, filterkeys)
 
     #Apply ordering (default to by beer name ASC if none)
-    composed_query = _applyOrdering(composed_query, orderby)
+    query = _applyOrdering(query, orderby)
 
-    results = composed_query.paginate(page,MAX_RESULTS_PER_PAGE, error_out=False)
+    results = query.paginate(page,MAX_RESULTS_PER_PAGE, error_out=False)
 
     pager = {
             'prev': url_for('explore',
@@ -113,6 +114,9 @@ def _extractFromRequestargs(filterargs, orderarg):
     orderby = orderby[0].desc() if orderby[1] else orderby[0].asc()
 
     return joined_models, filterkeys, orderby
+
+def _mapCountriesgroupToCountry(countrygroup):
+    pass
 
 
 def _applyFilters(query, filterkeys):
