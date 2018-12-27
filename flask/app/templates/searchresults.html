@@ -157,35 +157,73 @@
       </th>
       <th>
         <input type="checkbox" id="filter_country" />
-        <label for="filter_country">Filters</label>
+        <label for="filter_country">Show Filters</label>
         <div>
           <span>
-            <input type="checkbox" id="f_us" />
-            <label for="f_nam">US and Canada</label>
+            <label>
+            <input
+               type="checkbox"
+               name="filterby"
+              {% if not filtered_by or 'countries|United States;Canada' in filtered_by%}checked{% endif %}
+              value="countries|United States;Canada" />
+            US and Canada</label>
           </span>
           <span>
-            <input type="checkbox" id="f_de" />
-            <label for="f_nam">Germany</label>
+            <label>
+            <input
+               type="checkbox"
+               name="filterby"
+              {% if not filtered_by or 'countries|Germany' in filtered_by%}checked{% endif %}
+              value="countries|Germany" />
+            Germany</label>
           </span>
           <span>
-            <input type="checkbox" id="f_bel" />
-            <label for="f_nam">Belgium</label>
+            <label>
+            <input
+               type="checkbox"
+               name="filterby"
+              {% if not filtered_by or 'countries|Belgium' in filtered_by%}checked{% endif %}
+              value="countries|Belgium" />
+            Belgium</label>
           </span>
           <span>
-            <input type="checkbox" id="f_uk" />
-            <label for="f_nam">UK and Ireland</label>
+            <label>
+            <input
+               type="checkbox"
+               name="filterby"
+              {% if not filtered_by or 'countries|United Kingdom,Ireland' in filtered_by%}checked{% endif %}
+              value="countries|United Kingdom;Ireland" />
+            UK and Ireland</label>
           </span>
           <span>
-            <input type="checkbox" id="f_uk" />
-            <label for="f_nam">Australia and New Zealand</label>
+            <label>
+            <input
+               type="checkbox"
+               name="filterby"
+              {% if not filtered_by or 'countries|Australia;New Zealand' in filtered_by%}checked{% endif %}
+              value="countries|Australia;New Zealand" />
+            Australia and New Zealand</label>
           </span>
           <span>
-            <input type="checkbox" id="f_eu" />
-            <label for="f_nam">Other, Europe</label>
+            <label>
+            <input
+               type="checkbox"
+               name="filterby"
+              {% if not filtered_by or 'countries|Austria;Croatia;Czech Republic;Denmark;Estonia;Finland;France;Greece;Hungary;Italy;Latvia;Lithuania;Macedonia, the Former Yugoslav Republic of;Netherlands;Norway;Poland;Portugal;Russia;Serbia and Montenegro;Slovakia;Spain;Sweden;Switzerland' in filtered_by%}checked{% endif %}
+              value="countries|Austria;Croatia;Czech Republic;Denmark;Estonia;Finland;France;Greece;Hungary;Italy;Latvia;Lithuania;Macedonia, the Former Yugoslav Republic of;Netherlands;Norway;Poland;Portugal;Russia;Serbia and Montenegro;Slovakia;Spain;Sweden;Switzerland" />
+            Other, Europe</label>
           </span>
           <span>
-            <input type="checkbox" id="f_w" />
-            <label for="f_nam">Other, World</label>
+            <label>
+            <input
+               type="checkbox"
+               name="filterby"
+              {% if not filtered_by or 'countries|Argentina;Aruba;Belize;Brazil;China;Colombia;Cuba;Egypt;El Salvador;French Polynesia;Guatemala;Honduras;India;Israel;Jamaica;Japan;Kenya;Korea, Republic of;Macao;Mauritius;Mexico;Myanmar;Namibia;Panama;Philippines;Sierra Leone;Sri Lanka;Taiwan, Province of China;Thailand;Togo;Viet Nam' in filtered_by%}checked{% endif %}
+              value="countries|Argentina;Aruba;Belize;Brazil;China;Colombia;Cuba;Egypt;El Salvador;French Polynesia;Guatemala;Honduras;India;Israel;Jamaica;Japan;Kenya;Korea, Republic of;Macao;Mauritius;Mexico;Myanmar;Namibia;Panama;Philippines;Sierra Leone;Sri Lanka;Taiwan, Province of China;Thailand;Togo;Viet Nam" />
+            Other, World</label>
+          </span>
+          <span>
+            <button type="submit">Apply Filters</button>
           </span>
         </div>
       </th>
@@ -207,7 +245,7 @@
   <tfoot id="tfoot">
     <tr>
       <td colspan="6">
-        Page {{pager.page}} of {{pager.pages}}
+        Page {{results.page}} of {{results.pages}}
       </td>
     </tr>
     <tr>

@@ -2,6 +2,7 @@ from flask import render_template, request, url_for
 from app import app
 from app.models import Beer, Category, Brewery
 from collections import defaultdict
+from itertools import chain
 
 #Routing constants
 VIEWS = {
@@ -91,7 +92,7 @@ def _extractFromRequestargs(filterargs, orderarg):
         filterkeys[key].append(value)
         if key.lower() == 'category':
             joined_models.add(Category)
-        if key.lower() in ['region', 'country']:
+        if key.lower() in ['region', 'countries']:
             joined_models.add(Brewery)
 
     if orderarg:
@@ -115,9 +116,6 @@ def _extractFromRequestargs(filterargs, orderarg):
 
     return joined_models, filterkeys, orderby
 
-def _mapCountriesgroupToCountry(countrygroup):
-    pass
-
 
 def _applyFilters(query, filterkeys):
     if len(filterkeys) < 1:
@@ -134,11 +132,10 @@ def _applyFilters(query, filterkeys):
                 query = query.filter(Brewery.state.in_(v))
            else:
                 query = query.filter(Brewery.state == v[0])
-        if k == 'country':
-           if len(v) > 1:
-                query = query.filter(Brewery.country.in_(v))
-           else:
-                query = query.filter(Brewery.country == v[0])
+        if k == 'countries':
+            countries =  [i[0].split(';') for i in v]
+            countries = (list(chain.from_iterable(countries)))
+            query = query.filter(Brewery.country.in_(countries))
     return query
 
 
