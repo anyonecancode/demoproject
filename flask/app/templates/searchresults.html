@@ -233,12 +233,12 @@
   <tbody>
     {% for r in results.items %}
     <tr>
-      <td class="beername"><a href="#">{{ r.name }}</a></td>
-      <td>{% if r.category %}<a href="#">{{r.category.name}}</a>, <a href="#">{{r.style.name}}</a>{% endif %}</td>
-      <td>4.5</td>
-      <td>{% if r.brewery.name %}<a href="#">{{ r.brewery.name }}</a>{% endif %}</td>
-      <td>{% if r.brewery.country %}<a href="#">{{ r.brewery.country }}</a>{% endif %}</td>
-      <td>{% if r.brewery.state %}<a href="#">{{ r.brewery.state }}</a>{% endif %}</td>
+      <td class="beername"><a href="/beers/{{r.id}}">{{ r.name }}</a></td>
+      <td>{% if r.category %}{{r.category.name}}, {{r.style.name}}{% endif %}</td>
+      <td>{% if r.abv %}{{r.abv}} {% endif %}</td>
+      <td>{% if r.brewery.name %}<a href="/brewery/{{r.brewery.name}}">{{ r.brewery.name }}</a>{% endif %}</td>
+      <td>{% if r.brewery.country %}{{ r.brewery.country }}{% endif %}</td>
+      <td>{% if r.brewery.state %}{{ r.brewery.state }}{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>

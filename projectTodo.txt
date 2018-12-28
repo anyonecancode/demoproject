@@ -6,6 +6,7 @@ Features
 - Login
 - Library
 - Search
+- Brewery detail page
 
 Infra:
 - Postgres

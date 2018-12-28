@@ -1,8 +1,12 @@
-<h3><a href="..">Irish Ale</a> » <a href="">Porter</a> » Cutthroat Porter<br/>
+<h3>{{beer.name}}<br/>
   <small>
-  <em>Odell Brewing</em><br />
-  4.8% ABV | Porter (Irish Ale)
+    <em>{{beer.brewery.name}}</em><br />
+    {{beer.abv}}% ABV | {{beer.category.name}} &ndash; {{beer.style.name}}
   </small>
 </h3>
 
-<p>This is one of our rare lagers brewed in the style of the German Heiliges Geist Bock, or Holy Ghost Bock. The name refers to the lighter nature of the beer as opposed to the darker and heavier Doppel Bock and Mai Bock also brewed during the spring in Germany. There is a rich malt flavor, a firm German style lager head, and a clean lagered finish to this beer.  Available on draft or in 12 oz. bottles.</p>
+<p>{%if beer.descript %} {{beer.descript}} {% else %} <em>No description available</em> {%endif %}</p>
+
+<div class="more_block">
+  <p><a href="{{url_for('explore') }}">Explore</a> more beer&hellip;</p>
+</div>

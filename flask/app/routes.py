@@ -1,4 +1,4 @@
-from flask import render_template, request, url_for
+from flask import render_template, request, url_for, abort
 from app import app
 from app.models import Beer, Category, Brewery
 from collections import defaultdict
@@ -13,7 +13,12 @@ VIEWS = {
         }
     ,'explore': {
         'template': 'searchresults.html'
-        ,'section': 'browse'
+        ,'section': 'explore'
+        ,'title': 'Explore'
+        }
+    ,'beer_detail': {
+        'template': 'view_beer.html'
+        ,'section': 'explore'
         ,'title': 'Explore'
         }
     }
@@ -26,9 +31,24 @@ MAX_RESULTS_PER_PAGE = 25
 
 @app.route('/')
 def index():
+    botd = Beer.query.get(43)
     return render_template(
             VIEWS['home']['template']
+            ,beer=botd
             ,section=VIEWS['home']['section'])
+
+
+@app.route('/beers/<int:id>')
+def beer(id):
+    beer = Beer.query.get(id)
+    print('beer:',beer.descript)
+    if not beer:
+        abort(404)
+    return render_template(
+            VIEWS['beer_detail']['template']
+            ,beer=beer
+            ,title=VIEWS['explore']['title'] + " | {0}".format(beer.name)
+            ,section=VIEWS['beer_detail']['section'])
 
 
 @app.route('/explore')
