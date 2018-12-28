@@ -3,6 +3,7 @@ from app import app
 from app.models import Beer, Category, Brewery
 from collections import defaultdict
 from itertools import chain
+from datetime import date
 
 #Routing constants
 VIEWS = {
@@ -31,9 +32,11 @@ MAX_RESULTS_PER_PAGE = 25
 
 @app.route('/')
 def index():
+    today = date.today().strftime('%A, %B %-d, %Y')
     botd = Beer.query.get(43)
     return render_template(
             VIEWS['home']['template']
+            ,today=today
             ,beer=botd
             ,section=VIEWS['home']['section'])
 
