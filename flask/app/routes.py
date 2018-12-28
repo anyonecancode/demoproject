@@ -4,6 +4,7 @@ from app.models import Beer, Category, Brewery
 from collections import defaultdict
 from itertools import chain
 from datetime import date
+from  sqlalchemy.sql.expression import func
 
 #Routing constants
 VIEWS = {
@@ -24,6 +25,8 @@ VIEWS = {
         }
     }
 
+BOTD = { }
+
 #Pagination constants
 #In a larger app, might go in separate config or constants file, but
 #the current app is small enough it makes more sense to keep it closer
@@ -33,11 +36,13 @@ MAX_RESULTS_PER_PAGE = 25
 @app.route('/')
 def index():
     today = date.today().strftime('%A, %B %-d, %Y')
-    botd = Beer.query.get(43)
+
+    #This will give a new beer per day, provided the server does not restart.
+    BOTD[today] = BOTD.get(today, Beer.query.order_by(func.random()).first())
     return render_template(
             VIEWS['home']['template']
             ,today=today
-            ,beer=botd
+            ,beer=BOTD[today]
             ,section=VIEWS['home']['section'])
 
 

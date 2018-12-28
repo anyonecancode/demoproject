@@ -21,3 +21,4 @@ Infra:
 
 Tweaks
 - number formatter (eg thousands results on browse page)
+- BOTD page should really use client date rather than server date
